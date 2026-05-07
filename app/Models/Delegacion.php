@@ -24,6 +24,11 @@ class Delegacion extends Model
         return $this->belongsTo(Nivel::class);
     }
 
+    public function participantes()
+    {
+        return $this->hasMany(Participante::class);
+    }
+
     public function getNombreCompletoAttribute()
     {
         return "{$this->delegacion} - {$this->sede}";
