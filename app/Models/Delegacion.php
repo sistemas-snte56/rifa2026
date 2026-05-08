@@ -31,6 +31,6 @@ class Delegacion extends Model
 
     public function getNombreCompletoAttribute()
     {
-        return "{$this->delegacion} - {$this->sede}";
+        return "{$this->delegacion} - {$this->nivel->nombre} - {$this->sede}";
     }
 }
