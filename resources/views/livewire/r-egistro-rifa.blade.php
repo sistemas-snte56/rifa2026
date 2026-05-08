@@ -35,7 +35,7 @@
 
                 <label class="block text-base font-medium mb-4 tracking-wide" style="color:#353a40;">
 
-                    INGRESA TU NÚMERO DE PERSONAL
+                    Ingresa tu número de personal.
 
                 </label>
 
