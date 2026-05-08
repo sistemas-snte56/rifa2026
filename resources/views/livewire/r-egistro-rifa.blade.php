@@ -42,7 +42,7 @@
                 {{-- INPUT + BOTÓN RESPONSIVE --}}
                 <div class="flex flex-col sm:flex-row gap-2">
 
-                    <input type="text" wire:model="numero_personal" wire:keydown.enter.prevent="buscarPersona" placeholder="Ej. 123456"
+                    <input type="tel" wire:model="numero_personal" wire:keydown.enter.prevent="buscarPersona" placeholder="Ej. 123456"
                         class="flex-1 w-full px-4 py-3 text-base rounded-lg border outline-none transition focus:ring-2"
                         style="border-color:#d1d5db; --tw-ring-color:#ee7a0055;" />
 
