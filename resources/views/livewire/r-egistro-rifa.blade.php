@@ -46,7 +46,7 @@
                         class="flex-1 w-full px-4 py-3 text-base rounded-lg border outline-none transition focus:ring-2"
                         style="border-color:#d1d5db; --tw-ring-color:#ee7a0055;" />
 
-                    <button type="submit" wire:click="buscarPersona"
+                    <button type="button" wire:click="buscarPersona"
                         class="w-full sm:w-auto px-5 py-3 text-base font-medium text-white rounded-lg transition"
                         style="background:#89194b;" onmouseover="this.style.background='#6a143a'"
                         onmouseout="this.style.background='#89194b'">

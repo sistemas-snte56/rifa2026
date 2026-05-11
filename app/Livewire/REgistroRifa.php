@@ -50,6 +50,14 @@ class RegistroRifa extends Component
         $registro = PadronBase::where('numero_personal', $this->numero_personal)->first();
 
         if ($registro) {
+            // ✅ Verificar si ya tiene folio ANTES de mostrar el paso 2
+            $yaRegistrado = Participante::where('padron_base_id', $registro->id)->exists();
+
+            if ($yaRegistrado) {
+                $this->addError('numero_personal', 'Este número de personal ya tiene un folio asignado.');
+                return;
+            }
+
             $this->nombre_encontrado = $registro->nombre_completo;
             $this->padron_id = $registro->id;
             $this->paso_dos = true;
