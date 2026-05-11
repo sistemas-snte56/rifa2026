@@ -168,13 +168,13 @@
 
                         @if($selectIdRegion)
 
-                        @foreach($delegaciones as $delegacion)
+                            @foreach($delegaciones as $delegacion)
 
-                        <option value="{{ $delegacion->id }}">
-                            {{ $delegacion->nombre_completo }}
-                        </option>
+                            <option value="{{ $delegacion->id }}">
+                                {{ $delegacion->nombre_completo }}
+                            </option>
 
-                        @endforeach
+                            @endforeach
 
                         @endif
 
@@ -231,9 +231,14 @@
 
                         </label>
 
-                        <input type="tel" wire:model="telefono" placeholder="10 dígitos" maxlength="10"
-                            class="w-full px-4 py-3 text-base rounded-lg border outline-none"
-                            style="border-color:#d1d5db;" />
+
+                        <input type="tel" 
+                            wire:model="telefono" 
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" {{-- <--- Bloquea letras y espacios al escribir --}}
+                            maxlength="10"
+                            class="w-full px-4 py-3 text-base rounded-lg border outline-none" 
+                            placeholder="Ej. 1234567890"
+                            style="border-color:#d1d5db;">    
 
                         @error('telefono')
                         <p class="mt-1 text-sm" style="color:#89194b;">
