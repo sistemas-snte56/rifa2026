@@ -111,12 +111,14 @@ class RegistroRifa extends Component
     public function registrar()
     {
         // Limpiamos el teléfono de espacios, guiones o paréntesis antes de validar
-        $this->telefono = preg_replace('/[^0-09]/', '', $this->telefono);
+        // $this->telefono = preg_replace('/[^0-09]/', '', $this->telefono);
+
+        // dd($this->telefono);
 
         // 1. Validar los datos
         $this->validate([
             'genero' => 'required',
-            'telefono' => 'required|digits:10',
+            'telefono' => 'required|digits:10|numeric',
             'email' => 'required|email',
             'selectIdDelegacion' => 'required',
             'padron_id' => 'required|unique:participantes,padron_base_id', // Evita doble registro
@@ -125,6 +127,7 @@ class RegistroRifa extends Component
             'genero.required' => 'El género es obligatorio.',
             'telefono.required' => 'El teléfono es obligatorio.',
             'telefono.digits' => 'El teléfono debe tener exactamente 10 dígitos.',
+            'telefono.numeric' => 'El télefono debe de ser númerico.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico no es válido.',
             'selectIdDelegacion.required' => 'La delegación es obligatoria.',
@@ -147,6 +150,29 @@ class RegistroRifa extends Component
             // 3. Redireccionar o mostrar éxito con el Folio
             session()->flash('mensaje', '¡Registro exitoso!');
             session()->flash('folio', $nuevoParticipante->folio);
+ 
+            
+            
+
+
+// ACCEDEMOS AL NOMBRE DESDE LA RELACIÓN Y LO PASAMOS A LA SESIÓN
+    // Importante: Usamos el nombre del método que definiste en tu modelo: padronBase
+    session()->flash('nombre', $nuevoParticipante->padronBase->nombre_completo);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
             return redirect()->to('/exito'); // O puedes mostrarlo en la misma pantalla
         } catch (\Throwable $th) {

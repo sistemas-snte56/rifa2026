@@ -20,6 +20,10 @@
             </div>
 
             <div class="p-8 text-center">
+                <!-- Imprimimos el nombre desde la sesión -->
+                <p class="text-xl mb-2">
+                    <strong>{{ session('nombre') }}</strong>
+                </p>
                 <p class="text-gray-600 font-medium">Tu participación ha sido registrada correctamente. Este es tu número de folio:</p>
                 
                 <!-- Recuadro del Folio - Color Negro/Gris Oscuro -->
