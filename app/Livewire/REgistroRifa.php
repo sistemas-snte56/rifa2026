@@ -23,6 +23,8 @@ class RegistroRifa extends Component
     public $selectIdRegion = null;
     public $selectIdDelegacion = null;
 
+    public $posibles_personas = [];
+
     public function updatedSelectIdRegion($value)
     {
         // Resetear delegación seleccionada
@@ -37,67 +39,89 @@ class RegistroRifa extends Component
 
     public $paso_dos = false;
 
-    // Se ejecuta cada vez que el numero_personal cambia en la vista
-    public function buscarPersona()
-    {
-        $this->paso_dos = false; // Resetear paso 2 cada vez que se busque un nuevo número
-        $this->nombre_encontrado = ''; // Limpiar nombre encontrado
-        $this->padron_id = ''; // Limpiar padron_id anterior
+    
+    
 
-        $this->validate([
-            'numero_personal' => 'required|numeric',
-        ], [
-            'numero_personal.required' => 'El número de personal es obligatorio.',
-            'numero_personal.numeric' => 'El número de personal debe ser numérico.',
-        ]);
 
-        // 1. Quitamos ceros que el usuario haya escrito (ej. "00123" -> "123")
-        $soloNumeros = ltrim($this->numero_personal, '0');
+    // Codigco nuevo
 
-        // 2. Creamos la versión de 7 dígitos (ej. "123" -> "0000123")
-        $conCeros = str_pad($soloNumeros, 7, "0", STR_PAD_LEFT);
 
-        // 3. Buscamos AMBAS posibilidades al mismo tiempo
-        $registro = PadronBase::whereIn('numero_personal', [$soloNumeros, $conCeros])
-                            ->first();
 
-        /*
-            if ($registro) {
-                // ✅ Verificar si ya tiene folio ANTES de mostrar el paso 2
-                $yaRegistrado = Participante::where('padron_base_id', $registro->id)->exists();
+public function buscarPersona()
+{
+    $this->paso_dos = false;
+    $this->nombre_encontrado = '';
+    $this->posibles_personas = []; // Limpiamos coincidencias
 
-                if ($yaRegistrado) {
-                    $this->addError('numero_personal', 'Este número de personal ya tiene un folio asignado.');
-                    return;
-                }
+    $this->validate([
+        'numero_personal' => 'required|numeric',
+    ]);
 
-                $this->nombre_encontrado = $registro->nombre_completo;
-                $this->padron_id = $registro->id;
-                $this->paso_dos = true;
-            } else {
-                $this->addError('numero_personal', 'No se encontró ese número personal.');
-            }
-        */
+    $soloNumeros = ltrim($this->numero_personal, '0');
+    $conCeros = str_pad($soloNumeros, 7, "0", STR_PAD_LEFT);
 
-        if ($registro) {
-            // ✅ Verificar si ya tiene folio ANTES de mostrar el paso 2
-            $yaRegistrado = Participante::where('padron_base_id', $registro->id)->exists();
+    // Buscamos TODOS los que coincidan con ambas versiones
+    $resultados = PadronBase::whereIn('numero_personal', [$soloNumeros, $conCeros])->get();
 
-            if ($yaRegistrado) {
-                $this->addError('numero_personal', 'Este número de personal ya tiene un folio asignado.');
-                return;
-            }
-            $this->nombre_encontrado = $registro->nombre_completo;
-            $this->padron_id = $registro->id;
-            $this->paso_dos = true;
-            $this->resetErrorBag('numero_personal'); // Limpiar errores anteriores
-        } else {
-            $this->nombre_encontrado = '';
-            $this->padron_id = '';
-            $this->paso_dos = false;
-            $this->addError('numero_personal', 'No se encontró el número: ' . $this->numero_personal);
-        }
+    if ($resultados->count() > 1) {
+        // CASO ESPECIAL: Hay duplicados (Activo/Jubilado)
+        $this->posibles_personas = $resultados;
+        $this->addError('numero_personal', 'Se encontraron múltiples registros. Por favor, selecciona el correcto.');
+        return;
+    } 
+    
+    if ($resultados->count() === 1) {
+        // CASO NORMAL: Solo hay uno
+        $registro = $resultados->first();
+        $this->procesarRegistro($registro);
+    } else {
+        $this->addError('numero_personal', 'No se encontró el número: ' . $this->numero_personal);
     }
+}
+
+// Nueva función auxiliar para no repetir código
+public function seleccionarPersona($id)
+{
+    $registro = PadronBase::find($id);
+    $this->procesarRegistro($registro);
+    $this->posibles_personas = []; // Limpiamos la lista una vez seleccionado
+}
+
+private function procesarRegistro($registro)
+{
+    $yaRegistrado = Participante::where('padron_base_id', $registro->id)->exists();
+
+    if ($yaRegistrado) {
+        $this->addError('numero_personal', 'Este registro ya tiene un folio asignado.');
+        return;
+    }
+
+    $this->nombre_encontrado = $registro->nombre_completo;
+    $this->padron_id = $registro->id;
+    $this->paso_dos = true;
+    $this->resetErrorBag('numero_personal');
+}
+
+
+
+    // Codigo nuevo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
 
