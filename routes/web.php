@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\ConsultaFolio;
 use App\Livewire\REgistroRifa;
 use Illuminate\Support\Facades\Route;
 
@@ -14,3 +15,4 @@ Route::get('/exito', function () {
     }
     return view('livewire.exito');
 })->name('exito');
+Route::get('/consultar-folio', ConsultaFolio::class)->name('consulta');

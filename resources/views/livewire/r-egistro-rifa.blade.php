@@ -46,14 +46,25 @@
                         class="flex-1 w-full px-4 py-3 text-base rounded-lg border outline-none transition focus:ring-2"
                         style="border-color:#d1d5db; --tw-ring-color:#ee7a0055;" />
 
-                    <button type="button" wire:click="buscarPersona"
-                        class="w-full sm:w-auto px-5 py-3 text-base font-medium text-white rounded-lg transition"
+                    
+                        
+                    <button type="button" wire:click="buscarPersona" wire:loading.attr="disabled" wire:target="buscarPersona"
+                        class="w-full sm:w-auto px-5 py-3 text-base font-medium text-white rounded-lg transition flex items-center justify-center min-w-[120px]"
                         style="background:#89194b;" onmouseover="this.style.background='#6a143a'"
                         onmouseout="this.style.background='#89194b'">
 
-                        Buscar
+                        
+                        <span wire:loading.remove wire:target="buscarPersona">Buscar</span>
+                        <span wire:loading wire:target="buscarPersona">Buscando...</span>
 
                     </button>
+
+
+
+
+
+
+
 
                 </div>
 
@@ -348,6 +359,22 @@
 
         </form>
 
+        {{-- BOTÓN PARA VOLVER O CERRAR --}}
+        <div class="mt-10 text-center">
+            <a href="{{ route('consulta') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700 transition flex items-center justify-center gap-2">
+                {{-- SVG DE LUPA DE BÚSQUEDA --}}
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform group-hover:scale-110" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                    <path d="M21 21l-6 -6" />
+                    <path d="M7 10l2 2l4 -4" /> {{-- Este check dentro de la lupa indica "verificación" --}}
+                </svg>
+                <span>¿Ya te registraste pero no viste tu folio? <strong>Consúltalo aquí.</strong></span>
+            </a>
+        </div>
+
     </div>
+
+
 
 </div>
