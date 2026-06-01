@@ -63,6 +63,11 @@ class ParticipantesTable
                     ->label('Teléfono')
                     ->searchable(),
 
+                TextColumn::make('genero')
+                    ->label('Género')
+                    ->sortable()
+                    ->searchable(),
+
                 TextColumn::make('created_at')
                     ->label('Fecha Registro')
                     ->dateTime('d/m/Y H:i')

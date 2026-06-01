@@ -1,66 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎟️ Sistema de Registro, Validación y Consulta - Rifa 2026
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📝 Descripción del Proyecto
+Este es un ecosistema web robusto y automatizado desarrollado con el **TALL Stack** para gestionar de punta a punta el ciclo de vida de una rifa institucional masiva. El sistema maneja con seguridad un padrón base de participantes, previene registros duplicados, resuelve conflictos de homónimos, ofrece una interfaz de registro en tiempo real sin recargas de página, y provee un backend administrativo de alta velocidad para la exportación de datos el día del evento.
 
-## About Laravel
+## 🏗️ Arquitectura y Stack Tecnológico
+- **Backend Framework:** Laravel 11 / 12
+- **Dynamic Frontend:** Livewire 3 (Arquitectura de componentes reactivos)
+- **Interactivity:** Alpine.js
+- **UI Styles & Responsiveness:** Tailwind CSS (Optimizado para móviles, tablets y escritorio)
+- **Admin & Dashboard Engine:** Filament PHP v4
+- **Database:** MySQL / MariaDB (Estructura relacional indexada)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Características Principales y Modelado de Datos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Sistema de Validación y Registro Multi-paso (Livewire)
+- **Fase de Búsqueda Activa:** Validación instantánea mediante el ingreso del número de personal contra el padrón cargado.
+- **Resolución de Homónimos/Coincidencias:** Lógica avanzada en el backend para identificar y desplegar opciones en caso de que existan registros idénticos entre personal activo y jubilado en la base de datos base, permitiendo al usuario seleccionar su perfil correcto.
+- **Integridad de Datos:** Bloqueo automático mediante la relación única del campo `padron_base_id` en la tabla de participantes para imposibilitar el doble registro.
 
-## Learning Laravel
+### 2. Panel Administrativo (Filament v4)
+- **Estructura Geográfica:** Gestión y segmentación jerárquica por Regiones y Delegaciones.
+- **Módulo de Consultas y Estadísticas:** Gráficas y contadores en tiempo real del avance del registro global y regional.
+- **Exportación Inteligente:** Integración de acciones nativas de exportación que heredan el estado del *Eloquent Query Builder*. Al aplicar filtros en la tabla (por ejemplo, filtrar por una región específica), la exportación a Excel/CSV genera únicamente el dataset filtrado para agilizar las listas de cotejo el día del sorteo.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 3. Interfaz de Contingencia y Cierre de Operaciones
+- **Congelamiento de Registro:** Vista Blade adaptada con la identidad visual corporativa (Colores institucional naranja y guinda) que inhabilita el formulario de inscripción una vez concluido el tiempo límite.
+- **Canal de Información Oficial:** Despliegue de los datos del sorteo directo en la tarjeta contenedora (Transmisión vía Facebook Live el 3 de Junio a las 5:00 PM).
+- **Persistencia de Soporte:** Mantenimiento activo del botón de consulta de folios para usuarios rezagados que requieran reimprimir o verificar su registro.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📦 Requisitos del Sistema e Instalación
 
-## Laravel Sponsors
+### Prerrequisitos
+- PHP 8.2 o superior
+- Composer
+- Node.js & NPM
+- Servidor de Base de Datos (MySQL 8.0+ / MariaDB 10.4+)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Pasos para el Despliegue
 
-### Premium Partners
+1. **Clonación del Repositorio:**
+   git clone [https://github.com/tu-usuario/sistema-rifa-snte56.git](https://github.com/tu-usuario/sistema-rifa-snte56.git)
+   cd sistema-rifa-snte56
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. **Instalación de Dependencias de Backend:**
+    composer install
 
-## Contributing
+3. **Instalación y Compilación de Assets de Frontend:**
+    npm install
+    npm run build
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Configuración de Env:**
+    cp .env.example .env
+    php artisan key:generate
 
-## Code of Conduct
+5. **Ejecución de Migraciones:**
+    php artisan migrate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. **Inicialización de Filament:**
+    php artisan filament:upgrade
+    php artisan make:filament-user
 
-## Security Vulnerabilities
+## 📊 Diagrama de Flujo Operativo
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+[Inicio: Usuario Web] 
+       │
+       ▼
+[Ingresa Número de Personal] ──► [Validación en Padrón Base]
+                                           │
+                    ┌──────────────────────┴──────────────────────┐
+                    ▼                                             ▼
+         [Existe Coincidencia Múltiple]               [Existe Registro Único]
+          (Caso: Activo vs Jubilado)                              │
+                    │                                             │
+                    ▼                                             ▼
+         [Usuario Selecciona Perfil] ────────────────────► [Habilita Paso 2]
+                                                                  │
+                                                                  ▼
+                                                      [Completa Datos de Contacto]
+                                                                  │
+                                                                  ▼
+                                                      [Generación de Folio Único]
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+##  📅 Protocolo para Futuros Eventos
+- **Actualización de Fechas:** Modificar la vista de cierre con los nuevos datos del sorteo.
+- **Purga de Padrón:** Vaciar la tabla padron_base e importar el nuevo Excel.
+- **Reseteo de Folios:** Truncar la tabla participantes para iniciar el nuevo ciclo.                                                    
+
+---
+
+##  ✒️ Licencia y Créditos
+Desarrollado para la gestión transparente y eficiente de eventos institucionales.
