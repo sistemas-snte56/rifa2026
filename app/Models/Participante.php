@@ -52,4 +52,9 @@ class Participante extends Model
     {
         return $this->belongsTo(Delegacion::class);
     }
+
+    public function premios()
+    {
+        return $this->hasMany(Premio::class);
+    }   
 }
