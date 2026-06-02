@@ -16,6 +16,10 @@ class DelegacionsTable
     {
         return $table
             ->columns([
+                tExtColumn::make('id')
+                    ->label('ID')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('region.nombre')
                     ->label('Región')
                     ->searchable()
