@@ -17,12 +17,15 @@ class PremioSeeder extends Seeder
         // Definición de los paquetes aprobados en la reunión
         $paquetes = [
             ['nombre' => 'iPad', 'descripcion' => 'iPad 11 pulgadas', 'cantidad' => 10, 'orden' => 1],
-            ['nombre' => 'Pantalla', 'descripcion' => 'PantallaDaweoo 70 pulgadas', 'cantidad' => 10, 'orden' => 2],
+            ['nombre' => 'Pantalla', 'descripcion' => 'Pantalla Daweoo 70 pulgadas', 'cantidad' => 10, 'orden' => 2],
             ['nombre' => 'Laptop', 'descripcion' => 'Laptop Dell Inspiron', 'cantidad' => 10, 'orden' => 3],
-            ['nombre' => 'Viaje', 'descripcion' => 'Viaje', 'cantidad' => 2, 'orden' => 4],
-            ['nombre' => 'Moto', 'descripcion' => 'Moto Italika', 'cantidad' => 3, 'orden' => 5],
-            ['nombre' => 'Auto', 'descripcion' => 'Auto Fiat Pulse 2026', 'cantidad' => 1, 'orden' => 6],
-        ];
+            ['nombre' => 'Viaje', 'descripcion' => 'Viaje no Playa', 'cantidad' => 1, 'orden' => 4],
+            ['nombre' => 'Viaje', 'descripcion' => 'Viaje Playa', 'cantidad' => 1, 'orden' => 5],
+            ['nombre' => 'Moto Italika', 'descripcion' => 'Moto Italika FT 150', 'cantidad' => 1, 'orden' => 6],
+            ['nombre' => 'Moto Italika', 'descripcion' => 'Moto Italika FT 200', 'cantidad' => 1, 'orden' => 7],
+            ['nombre' => 'Moto Italika', 'descripcion' => 'Moto Italika DM 150', 'cantidad' => 1, 'orden' => 8],
+            ['nombre' => 'Auto', 'descripcion' => 'Auto Fiat Pulse 2026', 'cantidad' => 1, 'orden' => 9],
+        ]; 
 
         foreach ($paquetes as $paquete) {
             $tipo = TipoPremio::create([

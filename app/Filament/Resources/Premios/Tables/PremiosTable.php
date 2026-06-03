@@ -25,8 +25,18 @@ class PremiosTable
     {
         return $table
             ->columns([
+                TextColumn::make('tipoPremio.id')
+                    ->label('Premio')
+                    ->sortable()
+                    ->searchable(),
+
                 TextColumn::make('tipoPremio.nombre')
-                    ->label('Tipo de Premio')
+                    ->label('Premio')
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('tipoPremio.descripcion')
+                    ->label('Descripción')
                     ->sortable()
                     ->searchable(),
 
@@ -105,7 +115,8 @@ class PremiosTable
 
                     ])
                 
-            ]);           
+            ])
+            ->paginated([50]);           
             
     }
 }
