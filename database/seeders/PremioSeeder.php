@@ -16,9 +16,9 @@ class PremioSeeder extends Seeder
     {
         // Definición de los paquetes aprobados en la reunión
         $paquetes = [
-            ['nombre' => 'iPad', 'descripcion' => 'iPad 11 pulgadas', 'cantidad' => 10, 'orden' => 1],
+            ['nombre' => 'iPad', 'descripcion' => 'iPad 11 pulgadas', 'cantidad' => 20, 'orden' => 1],
             ['nombre' => 'Pantalla', 'descripcion' => 'Pantalla Daweoo 70 pulgadas', 'cantidad' => 10, 'orden' => 2],
-            ['nombre' => 'Laptop', 'descripcion' => 'Laptop Dell Inspiron', 'cantidad' => 10, 'orden' => 3],
+            ['nombre' => 'Laptop', 'descripcion' => 'Laptop Dell Inspiron', 'cantidad' => 20, 'orden' => 3],
             ['nombre' => 'Viaje', 'descripcion' => 'Viaje no Playa', 'cantidad' => 1, 'orden' => 4],
             ['nombre' => 'Viaje', 'descripcion' => 'Viaje Playa', 'cantidad' => 1, 'orden' => 5],
             ['nombre' => 'Moto Italika', 'descripcion' => 'Moto Italika FT 150', 'cantidad' => 1, 'orden' => 6],
